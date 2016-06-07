@@ -1,0 +1,69 @@
+<ion-view  name="query-view">
+  <ion-nav-bar class="bar-positive" align-title="center">
+    <ion-nav-title>
+      {{user.username}}
+    </ion-nav-title>
+  </ion-nav-bar>
+  <ion-content class="padding" onscroll="false">
+      <p>请输入条码最后四位</p>
+    <label class="item item-input">
+      <input type="tel" ng-model="goods.codeNum" maxlength="4" ng-change="queryGoodsCode()">
+      <i class="icon ion-close-circled" style="font-size:30px" on-tap="doClearGoodCode()" ng-if="goods.codeNum"></i>
+    </label>
+    <div class="button-bar bar-positive" >
+      <button class="button" ng-click="updatePrice()">原价位{{selectedCodeInfo.oldPrice}}</button>
+      <button class="button">建议价位</button>
+      <button class="button">固定价位</button>
+    </div>
+    <p>点击下面条码或点击添加新商品</p>
+    <label class="item item-input item-select" style="padding-left:20px">
+      <div class="input-label">
+        商品条码
+      </div>
+      <select ng-model="selectedCode.codeNum" ng-options="code.value as code.value for code in barCodes" ng-change="func()">
+        <option value="">请选择...</option>
+      </select>
+    </label>
+    <textarea disabled="true">更新价位</textarea>
+    <label class="item item-input">
+      <input type="tel" ng-model="selectedCodeInfo.price1" ng-change="verify()">
+      <i class="icon ion-close-circled" style="font-size:30px" on-tap="doClearCodeNum()" ng-if="selectedCodeInfo.price"></i>
+    </label>
+    <p>打印设定</p>
+    <div class="button-bar">
+      <button class="{{class.class1}}" ng-click="updatePrintType1()">标签</button>
+      <button class="{{class.class2}}" ng-click="updatePrintType2()">大折扣</button>
+      <button class="{{class.class3}}" ng-click="updatePrintType3()">中折扣</button>
+      <button class="{{class.class4}}" ng-click="updatePrintType4()">小折扣</button>
+</div>
+    <p></p>
+    <div class="button-bar bar-positive" >
+      <button class="button" ng-click="addIVA()">+IVA</button>
+      <button class="button" ng-click="addPercentage1()">+10%</button>
+      <button class="button" ng-click="addPercentage2()">+5%</button>
+      <button class="button" ng-click="zero()">.00</button>
+    </div>
+    <p></p>
+    <div class="button-bar bar-positive" >
+      <button class="button" ng-click="reduceIVA()">-IVA</button>
+      <button class="button" ng-click="reducePercentage1()">-10%</button>
+      <button class="button" ng-click="reducePercentage2()">-5%</button>
+      <button class="button" ng-click="zero1()">0.50</button>
+    </div>
+    <ion-list>
+    <ion-item>
+    <span>{{selectedCodeInfo.nombre}}</span>
+    </ion-item>
+      <ion-item>
+          <span >{{selectedCodeInfo.codigo}}</span>
+      </ion-item>
+    </ion-list>
+    <button class="button button-block button-balanced" ng-click="savePrice()">
+      保存
+    </button>
+    <button class="button button-block button-calm" ng-click="addGoods()">
+      添加
+    </button>
+  </ion-content>
+</ion-view>
+
